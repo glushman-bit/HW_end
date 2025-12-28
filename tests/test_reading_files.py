@@ -79,6 +79,48 @@ def test_xlsx_unknown_error():
             read_data_from_excel("file.csv")
 
 
+def test_read_data_from_json_success():
+    """ Тест на правильность работы функции """
+    data = json.dumps([
+        {
+            "id": 1,
+            "state": "EXECUTED",
+            "date": "2023-01-01",
+            "operationAmount": {
+                "amount": "100",
+                "currency": {
+                    "name": "руб.",
+                    "code": "RUB"
+                }
+            },
+            "description": "Перевод",
+            "to": "Счет 123"
+        }
+    ])
+
+    with patch("builtins.open", mock_open(read_data=data)):
+        result = read_data_from_json("operations.json")
+
+    assert result == [
+        {
+            "id": 1,
+            "state": "EXECUTED",
+            "date": "2023-01-01",
+            "amount": "100",
+            "currency_name": "руб.",
+            "currency_code": "RUB",
+            "from": None,
+            "to": "Счет 123",
+            "description": "Перевод",
+        }
+    ]
+
+
+def test_read_data_from_json_error():
+    """ Некорректный JSON """
+    with patch("builtins.open", mock_open(read_data="")):
+        with pytest.raises(ValueError):
+            read_data_from_json("operations.json")
 
 def test_read_data_from_csv_not_found():
     """ Файл не найден """
