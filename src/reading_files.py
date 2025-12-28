@@ -16,12 +16,12 @@ csv_path = DATA_DIR / "transactions.csv"
 xlsx_path = DATA_DIR / "transactions_excel.xlsx"
 json_path = DATA_DIR / "operations.json"
 
-# logger = logging.getLogger("reading_file.log")
-# logger.setLevel(logging.DEBUG)
-# file_handler = logging.FileHandler("../logs/reading_file.log", mode="w", encoding="utf-8")
-# file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: - %(message)s")
-# file_handler.setFormatter(file_formatter)
-# logger.addHandler(file_handler)
+logger = logging.getLogger("reading_file.log")
+logger.setLevel(logging.DEBUG)
+#file_handler = logging.FileHandler("../logs/reading_file.log", mode="w", encoding="utf-8")
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: - %(message)s")
+#file_handler.setFormatter(file_formatter)
+#logger.addHandler(file_handler)
 
 
 def read_data_from_csv(csv_path: Union[Path, str]) -> List[Dict[str, str]]:

@@ -1,17 +1,17 @@
-def count_all_by_category(transactions, categories):
+from typing import List, Dict
+from collections import Counter
+
+def count_all_by_category(transactions: List[Dict], categories: List[str]) -> Dict[str, int]:
     """
     Функция подсчета количества операций по категориям
     :param transactions: Список словарей транзакции
     :param categories: Категории
     :return: Словарь количества по категориям
     """
-    categories_map = {cat.lower(): cat for cat in categories}
-    result = {cat: 0 for cat in categories}
+    descriptions = [trans.get("description", "").lower() for trans in transactions]
 
-    for trans in transactions:
-        description = trans.get("description", "").lower()
-        if description in categories_map:
-            original_category = categories_map[description]
-            result[original_category] += 1
+    counter = Counter(descriptions)
+
+    result = {cat: counter.get(cat.lower(), 0) for cat in categories}
 
     return result
