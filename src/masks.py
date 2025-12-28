@@ -39,8 +39,6 @@ def get_mask_card_number(number_card: str, mask_char: str = "*", group_size: int
     return group_number
 
 
-
-
 @log()
 def get_mask_account(number_account: str, mask_char: str = "*") -> str:
     """Функция, скрывающая номер банковского счета"""
@@ -59,5 +57,3 @@ def get_mask_account(number_account: str, mask_char: str = "*") -> str:
     logger.info("Успешный ввод номера счета.")
 
     return mask_number
-
-
