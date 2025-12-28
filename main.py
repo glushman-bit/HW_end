@@ -77,6 +77,7 @@ def main():
         transaction = filter_by_word(transaction, user_word)
 
     print("Распечатываю итоговый список транзакций...")
+
     print(f"Всего банковских операций в выборке: {len(transaction)}")
 
     for trans in transaction:
