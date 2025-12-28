@@ -10,15 +10,21 @@ from src.generators import transaction_descriptions
 transactions_sample_currency = [
     {
         "id": 939719570,
-        "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
+        "amount": "9824.07",
+        "currency_name": "USD",
+        "currency_code": "USD"
     },
     {
         "id": 142264268,
-        "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+        "amount": "79114.93",
+        "currency_name": "USD",
+        "currency_code": "USD"
     },
     {
         "id": 873106923,
-        "operationAmount": {"amount": "43318.34", "currency": {"name": "руб.", "code": "RUB"}},
+        "amount": "43318.34",
+        "currency_name": "RUB",
+        "currency_code": "RUB"
     },
 ]
 
@@ -28,8 +34,8 @@ def test_filter_by_currency_usd() -> None:
     result = list(filter_by_currency(transactions_sample_currency, "USD"))
 
     assert len(result) == 2
-    assert result[0]["id"] == 939719570
-    assert result[1]["id"] == 142264268
+    assert result[0]["currency_name"] == "USD"
+    assert result[1]["currency_name"] == "USD"
 
 
 def test_filter_by_currency_rub() -> None:

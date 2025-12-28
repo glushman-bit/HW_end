@@ -23,7 +23,8 @@ def group_size():
 
 
 @pytest.mark.parametrize(
-    "number_card, " "mask_char, " "group_size, " "expected", [("1234567890123456", "*", 4, "1234 56** **** 3456")]
+    "number_card, " "mask_char, " "group_size, " "expected",
+    [("1234567890123456", "*", 4, "1234 56** **** 3456")],
 )
 def test_mask_card_origin_func(number_card, mask_char, group_size, expected):
     assert get_mask_card_number(number_card, mask_char, group_size=4) == expected
@@ -33,7 +34,11 @@ def test_mask_card_origin_func(number_card, mask_char, group_size, expected):
 
 
 @pytest.mark.parametrize(
-    "number_card," "expected", [("1234567890", "**** **78 90"), ("1234567890123456789", "1234 56** **** ***6 789")]
+    "number_card," "expected",
+    [
+        ("1234567890", "**** **78 90"),
+        ("1234567890123456789", "1234 56** **** ***6 789"),
+    ],
 )
 def test_mask_unusual_length_number(number_card: str, expected):
     assert get_mask_card_number(number_card) == expected

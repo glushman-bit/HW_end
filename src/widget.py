@@ -32,6 +32,3 @@ def get_date(date_str: str) -> str:
     """Функция преобразования даты"""
     date_obj = datetime.fromisoformat(date_str)
     return date_obj.strftime("%d.%m.%Y")
-
-
-

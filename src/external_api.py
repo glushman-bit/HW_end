@@ -48,5 +48,3 @@ def converter_currency(transaction: float, currency: str) -> float:
         return result
 
     return transaction
-
-
