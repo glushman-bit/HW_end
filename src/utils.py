@@ -1,4 +1,3 @@
-
 def count_all_by_category(transactions, categories):
     """
     Функция подсчета количества операций по категориям
@@ -16,4 +15,3 @@ def count_all_by_category(transactions, categories):
             result[original_category] += 1
 
     return result
-

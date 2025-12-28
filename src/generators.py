@@ -6,16 +6,11 @@ from src.decorators import log
 @log()
 def filter_by_currency(transactions: list[dict], currency: str) -> Iterator[dict]:
     """Фильтрует транзакции по коду валюты."""
-    return (
-        item
-        for item in transactions
-        if item.get("operationAmount", {})
-               .get("currency", {})
-               .get("code") == currency
+    currency_gen = (
+        transaction
+        for transaction in transactions if transaction.get("currency_code", {}) == currency
     )
-
-
-
+    return currency_gen
 
 
 @log()
@@ -26,8 +21,6 @@ def transaction_descriptions(transactions: list[dict]) -> Iterator[str]:
         description = tx.get("description")
         if description is not None:
             yield description
-
-
 
 
 @log()
@@ -41,5 +34,3 @@ def card_number_generator(start: int, stop: int) -> Iterator[str]:
         # Форматируем по 4 цифры
         formatted = f"{digits[:4]} {digits[4:8]} {digits[8:12]} {digits[12:]}"
         yield formatted
-
-

@@ -1,4 +1,6 @@
 import re
+from typing import Dict
+from typing import List
 
 
 def filter_by_word(data: List[Dict], search: str) -> List[Dict]:
@@ -21,6 +23,3 @@ def filter_by_word(data: List[Dict], search: str) -> List[Dict]:
             result.append(operation)
 
     return result
-
-
-

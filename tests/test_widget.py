@@ -4,13 +4,15 @@ from src.widget import get_date
 from src.widget import mask_account_card
 
 
-
 @pytest.mark.parametrize(
     "number_account, expected",
     [
         ("Visa 1234567890123456", "Visa 1234 56** **** 3456"),  # 16-значная карта
         ("MasterCard 1111222233334444", "MasterCard 1111 22** **** 4444"),
-        ("Card 1234567890123456789", "Card 1234 56** **** ***6 789"),  # 19-значная карта
+        (
+            "Card 1234567890123456789",
+            "Card 1234 56** **** ***6 789",
+        ),  # 19-значная карта
         ("МояКарта 1234567890", "МояКарта **** **78 90"),  # 10-значная карта
         ("Счет 12345678901234567890", "Счет **7890"),  # Счет
         ("сЧеТ 12345678901234567890", "сЧеТ **7890"),  # Невосприимчивость к регистру
@@ -18,40 +20,31 @@ from src.widget import mask_account_card
     ],
 )
 def test_mask_card_recognition(number_account, expected):
-    """ Проверка корректности распознавания входных данных, проверка с разными типами карт и счетов """
+    """Проверка корректности распознавания входных данных, проверка с разными типами карт и счетов"""
     assert mask_account_card(number_account) == expected
 
 
-
-
-
 def test_no_number_present() -> None:
-    """ Проверка на отсутствие номера """
+    """Проверка на отсутствие номера"""
     with pytest.raises(ValueError):
         mask_account_card("Просто текст без номера")
 
 
-
-
-
 def test_empty_string() -> None:
-    """ Проверка на ввод пустой строки """
+    """Проверка на ввод пустой строки"""
     with pytest.raises(ValueError):
         mask_account_card("Ничего не введено")
 
 
 def test_wrong_number_length() -> None:
-    """ Проверка на длину номера """
+    """Проверка на длину номера"""
     with pytest.raises(ValueError):
         mask_account_card("Visa 123456")
 
 
 def test_get_date_origin() -> None:
-    """ Проверка правильности преобразования даты и граничные случаи """
+    """Проверка правильности преобразования даты и граничные случаи"""
     assert get_date("2019-07-03T18:35:29.512364") == "03.07.2019"
-
-
-
 
 
 @pytest.mark.parametrize(
@@ -64,11 +57,8 @@ def test_get_date_origin() -> None:
     ],
 )
 def test_get_date_present(date, expected):
-    """ Проверка на ввод не стандартных дат """
+    """Проверка на ввод не стандартных дат"""
     assert get_date(date) == expected
-
-
-
 
 
 @pytest.mark.parametrize(
@@ -82,12 +72,9 @@ def test_get_date_present(date, expected):
     ],
 )
 def test_get_date_wrong_format(input_value):
-    """ Проверка на неверный формат даты """
+    """Проверка на неверный формат даты"""
     with pytest.raises(ValueError):
         get_date(input_value)
-
-
-
 
 
 @pytest.mark.parametrize(
@@ -100,6 +87,6 @@ def test_get_date_wrong_format(input_value):
     ],
 )
 def test_get_date_no_date(input_value):
-    """ Проверка на отсутствие даты """
+    """Проверка на отсутствие даты"""
     with pytest.raises(ValueError):
         get_date(input_value)
